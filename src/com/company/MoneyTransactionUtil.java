@@ -6,18 +6,21 @@ public class MoneyTransactionUtil {
     private MoneyTransactionUtil() {
     }
 
-    public static void sendTo(String numCardFrom, String numCardTo, double sum) throws RuntimeException {
+    public static void sendTo(String numCardFrom, String numCardTo, double sum) throws AccountException,
+            MoneyValueExeption {
 
         try {
             if (numCardFrom == numCardTo) {
                 System.out.println("Проверка номера карт");
-                throw new RuntimeException("Одинаковый номер карт");
+                throw new AccountException();
+                // throw new RuntimeException("Одинаковый номер карт");
             }
 
             if (sum <= 0 || sum > 100_000.00) {
                 System.out.println("Номер - гут");
                 System.out.println("Проверка суммы перевода");
-                throw new RuntimeException("попахивает муткой)");
+                throw new MoneyValueExeption();
+                // throw new RuntimeException("попахивает муткой)");
             }
         } finally {
 
@@ -26,6 +29,5 @@ public class MoneyTransactionUtil {
                 + " успешно переведена на счет - " + numCardTo);
     }
 }
-
 
 
